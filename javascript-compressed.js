@@ -812,14 +812,22 @@ Blockly.JavaScript['b3entity_get'] = function (block) {
     var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var obj = block.getFieldValue('OBJ');
     var objs = {PLAYER: 'player'}
-    var code = eval(name) + '.' + objs[obj];
+    try {
+        var code = eval(name) + '.' + objs[obj];
+    } catch (err) {
+        var code = name + '.' + objs[obj];
+    }
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['b3entity_mesh'] = function (block) {
     var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = eval(name) + '.mesh = ' + value + ';\n';
+    try {
+        var code = eval(name) + '.mesh = ' + value + ';\n';
+    } catch (err) {
+        var code = name + '.mesh = ' + value + ';\n';
+    }
     return code;
 };
 
@@ -828,53 +836,85 @@ Blockly.JavaScript['b3entity_pos'] = function (block) {
     var x = Number(block.getFieldValue('X'));
     var y = Number(block.getFieldValue('Y'));
     var z = Number(block.getFieldValue('Z'));
-    var code = eval(name) + '.position = Box3Vector3(' + x + ', ' + y + ', ' + z + ');\n';
+    try {
+        var code = eval(name) + '.position = Box3Vector3(' + x + ', ' + y + ', ' + z + ');\n';
+    } catch (err) {
+        var code = name + '.position = Box3Vector3(' + x + ', ' + y + ', ' + z + ');\n';
+    }
     return code;
 };
 
 Blockly.JavaScript['b3entity_say'] = function (block) {
     var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = eval(name) + '.say(' + text + ');\n';
+    try {
+        var code = eval(name) + '.say(' + text + ');\n';
+    } catch (err) {
+        var code = name + '.say(' + text + ');\n';
+    }
     return code;
 };
 
 Blockly.JavaScript['b3entity_enableInteract'] = function (block) {
     var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var able = eval(block.getFieldValue('ABLE'));
-    var code = eval(name) + '.enableInteract = ' + able + ';\n';
+    try {
+        var code = eval(name) + '.enableInteract = ' + able + ';\n';
+    } catch (err) {
+        var code = name + '.enableInteract = ' + able + ';\n';
+    }
     return code;
 };
 
 Blockly.JavaScript['b3entity_text'] = function (block) {
     var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = eval(name) + '.interactHint = ' + text + ';\n';
+    try {
+        var code = eval(name) + '.interactHint = ' + text + ';\n';
+    } catch (err) {
+        var code = name + '.interactHint = ' + text + ';\n';
+    }
     return code;
 };
 
 Blockly.JavaScript['b3entity_destroy'] = function (block) {
     var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = eval(name) + '.destroy();\n';
+    try {
+        var code = eval(name) + '.destroy();\n';
+    } catch (err) {
+        var code = name + '.destroy();\n';
+    }
     return code;
 };
 
 Blockly.JavaScript['b3player_name'] = function (block) {
     var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = eval(name) + '.name';
+    try {
+        var code = eval(name) + '.name';
+    } catch (err) {
+        var code = name + '.name';
+    }
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['b3player_id'] = function (block) {
     var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = eval(name) + '.boxId';
+    try {
+        var code = eval(name) + '.boxId';
+    } catch (err) {
+        var code = name + '.boxId';
+    }
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['b3player_key'] = function (block) {
     var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = eval(name) + '.userKey';
+    try {
+        var code = eval(name) + '.userKey';
+    } catch (err) {
+        var code = name + '.userKey';
+    }
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
@@ -883,20 +923,32 @@ Blockly.JavaScript['b3player_sp'] = function (block) {
     var x = Number(block.getFieldValue('X'));
     var y = Number(block.getFieldValue('Y'));
     var z = Number(block.getFieldValue('Z'));
-    var code = eval(name) + '.spawnPoint = Box3Vector3(' + x + ', ' + y + ', ' + z + ');\n';
+    try {
+        var code = eval(name) + '.spawnPoint = Box3Vector3(' + x + ', ' + y + ', ' + z + ');\n';
+    } catch (err) {
+        var code = name + '.spawnPoint = Box3Vector3(' + x + ', ' + y + ', ' + z + ');\n';
+    }
     return code;
 };
 
 Blockly.JavaScript['b3player_send'] = function (block) {
     var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = eval(name) + '.directMessage(' + text + ');\n';
+    try {
+        var code = eval(name) + '.directMessage(' + able + ');\n';
+    } catch (err) {
+        var code = name + '.directMessage(' + able + ');\n';
+    }
     return code;
 };
 
 Blockly.JavaScript['b3player_fly'] = function (block) {
     var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var able = eval(block.getFieldValue('ABLE'));
-    var code = eval(name) + '.canFly = ' + able + ';\n';
+    try {
+        var code = eval(name) + '.canFly = ' + able + ';\n';
+    } catch (err) {
+        var code = name + '.canFly = ' + able + ';\n';
+    }
     return code;
 };
