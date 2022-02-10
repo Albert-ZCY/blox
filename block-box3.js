@@ -35,106 +35,31 @@ Blockly.Blocks['b3world_say'] = {
     }
 };
 
-Blockly.Blocks['b3event_tick_bond'] = {
+Blockly.Blocks['b3event_arg'] = {
     init: function () {
-        this.appendValueInput("NAME")
-            .setCheck("String")
-            .appendField("时间事件绑定");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(360);
-        this.setTooltip("填写函数名称");
+        this.appendDummyInput()
+            .appendField("事件参数：")
+            .appendField(new Blockly.FieldTextInput("tick"), "NAME");
+        this.setOutput(true, null);
+        this.setColour(0);
+        this.setTooltip("");
         this.setHelpUrl("");
     }
 };
 
-Blockly.Blocks['b3event_chat_bond'] = {
+Blockly.Blocks['b3event_world'] = {
     init: function () {
-        this.appendValueInput("NAME")
-            .setCheck("String")
-            .appendField("聊天事件绑定");
+        this.appendDummyInput()
+            .appendField("当 世界 触发")
+            .appendField(new Blockly.FieldDropdown([["时间循环", "TICK"], ["玩家聊天", "CHAT"], ["玩家加入", "JOIN"], ["玩家离开", "LEAVE"], ["按下按键", "PRESS"], ["松开按键", "RELEASE"], ["点击实体", "CLICKE"], ["实体创建", "CREATE"], ["玩家造成伤害", "DAMAGE"], ["玩家死亡", "DIE"], ['发生互动', 'INTERACT']]), "NAME")
+            .appendField("事件");
+        this.appendStatementInput("FUNC")
+            .setCheck(null)
+            .appendField("执行");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(360);
-        this.setTooltip("填写函数名称");
-        this.setHelpUrl("");
-    }
-};
-
-Blockly.Blocks['b3event_join_bond'] = {
-    init: function () {
-        this.appendValueInput("NAME")
-            .setCheck("String")
-            .appendField("玩家加入事件绑定");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(360);
-        this.setTooltip("填写函数名称");
-        this.setHelpUrl("");
-    }
-};
-
-Blockly.Blocks['b3event_leave_bond'] = {
-    init: function () {
-        this.appendValueInput("NAME")
-            .setCheck("String")
-            .appendField("玩家离开事件绑定");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(360);
-        this.setTooltip("填写函数名称");
-        this.setHelpUrl("");
-    }
-};
-
-Blockly.Blocks['b3event_interact_bond'] = {
-    init: function () {
-        this.appendValueInput("NAME")
-            .setCheck("String")
-            .appendField("互动事件绑定");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(360);
-        this.setTooltip("填写函数名称");
-        this.setHelpUrl("");
-    }
-};
-
-Blockly.Blocks['b3event_click_bond'] = {
-    init: function () {
-        this.appendValueInput("NAME")
-            .setCheck("String")
-            .appendField("点击实体事件绑定");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(360);
-        this.setTooltip("填写函数名称");
-        this.setHelpUrl("");
-    }
-};
-
-Blockly.Blocks['b3event_press_bond'] = {
-    init: function () {
-        this.appendValueInput("NAME")
-            .setCheck("String")
-            .appendField("按下按键事件绑定");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(360);
-        this.setTooltip("填写函数名称");
-        this.setHelpUrl("");
-    }
-};
-
-Blockly.Blocks['b3event_release_bond'] = {
-    init: function () {
-        this.appendValueInput("NAME")
-            .setCheck("String")
-            .appendField("松开按键事件绑定");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(360);
-        this.setTooltip("填写函数名称");
+        this.setColour(0);
+        this.setTooltip("");
         this.setHelpUrl("");
     }
 };
@@ -147,45 +72,6 @@ Blockly.Blocks['b3world_create_entity'] = {
         this.setOutput(true, null);
         this.setColour(120);
         this.setTooltip("填写参数");
-        this.setHelpUrl("");
-    }
-};
-
-Blockly.Blocks['b3event_entity_create_bond'] = {
-    init: function () {
-        this.appendValueInput("NAME")
-            .setCheck("String")
-            .appendField("实体创建事件绑定");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(360);
-        this.setTooltip("填写函数名称");
-        this.setHelpUrl("");
-    }
-};
-
-Blockly.Blocks['b3event_damage_bond'] = {
-    init: function () {
-        this.appendValueInput("NAME")
-            .setCheck("String")
-            .appendField("受伤害事件绑定");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(360);
-        this.setTooltip("填写函数名称");
-        this.setHelpUrl("");
-    }
-};
-
-Blockly.Blocks['b3event_die_bond'] = {
-    init: function () {
-        this.appendValueInput("NAME")
-            .setCheck("String")
-            .appendField("死亡事件绑定");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(360);
-        this.setTooltip("填写函数名称");
         this.setHelpUrl("");
     }
 };
@@ -312,11 +198,31 @@ Blockly.Blocks['b3voxels_get'] = {
     }
 };
 
+Blockly.Blocks['b3entity_get'] = {
+    init: function () {
+        this.appendValueInput("NAME")
+            .setCheck(null)
+            .appendField("从实体");
+        this.appendDummyInput()
+            .appendField("获取")
+            .appendField(new Blockly.FieldDropdown([["玩家", "PLAYER"]]), "OBJ");
+        this.setInputsInline(true);
+        this.setOutput(true, null);
+        this.setColour(30);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
 Blockly.Blocks['b3entity_mesh'] = {
     init: function () {
+        this.appendValueInput("NAME")
+            .setCheck(null)
+            .appendField("设置实体");
         this.appendValueInput("VALUE")
             .setCheck(null)
-            .appendField("设置实体形状");
+            .appendField("形状");
+        this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(30);
@@ -327,8 +233,11 @@ Blockly.Blocks['b3entity_mesh'] = {
 
 Blockly.Blocks['b3entity_pos'] = {
     init: function () {
+        this.appendValueInput("NAME")
+            .setCheck(null)
+            .appendField("设置实体");
         this.appendDummyInput()
-            .appendField("设置实体位置")
+            .appendField('位置：')
             .appendField(new Blockly.FieldTextInput("X坐标"), "X")
             .appendField(new Blockly.FieldTextInput("Y坐标"), "Y")
             .appendField(new Blockly.FieldTextInput("Z坐标"), "Z");
@@ -343,9 +252,13 @@ Blockly.Blocks['b3entity_pos'] = {
 
 Blockly.Blocks['b3entity_say'] = {
     init: function () {
+        this.appendValueInput("NAME")
+            .setCheck(null)
+            .appendField("实体");
         this.appendValueInput("TEXT")
             .setCheck(null)
-            .appendField("实体发言");
+            .appendField("发言");
+        this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(30);
@@ -356,9 +269,11 @@ Blockly.Blocks['b3entity_say'] = {
 
 Blockly.Blocks['b3entity_enableInteract'] = {
     init: function () {
-        this.appendDummyInput()
+        this.appendValueInput('NAME')
             .appendField(new Blockly.FieldDropdown([["允许", "true"], ["禁止", "false"]]), "ABLE")
-            .appendField("实体互动");
+            .appendField("实体");
+        this.appendDummyInput()
+            .appendField("互动");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(30);
@@ -369,9 +284,13 @@ Blockly.Blocks['b3entity_enableInteract'] = {
 
 Blockly.Blocks['b3entity_text'] = {
     init: function () {
-        this.appendValueInput("TEXT")
+        this.appendValueInput("NAME")
             .setCheck(null)
-            .appendField("设置互动提示文本");
+            .appendField("设置实体");
+        this.appendValueInput('TEXT')
+            .setCheck(null)
+            .appendField('互动提示文本');
+        this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(30);
@@ -382,7 +301,7 @@ Blockly.Blocks['b3entity_text'] = {
 
 Blockly.Blocks['b3entity_destroy'] = {
     init: function () {
-        this.appendDummyInput()
+        this.appendValueInput('NAME')
             .appendField("销毁实体");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -394,8 +313,12 @@ Blockly.Blocks['b3entity_destroy'] = {
 
 Blockly.Blocks['b3player_name'] = {
     init: function () {
+        this.appendValueInput("NAME")
+            .setCheck(null)
+            .appendField("玩家");
         this.appendDummyInput()
-            .appendField("玩家用户名");
+            .appendField("用户名");
+        this.setInputsInline(true);
         this.setOutput(true, null);
         this.setColour(190);
         this.setTooltip("");
@@ -405,8 +328,11 @@ Blockly.Blocks['b3player_name'] = {
 
 Blockly.Blocks['b3player_id'] = {
     init: function () {
+        this.appendValueInput("NAME")
+            .setCheck(null)
+            .appendField("玩家");
         this.appendDummyInput()
-            .appendField("玩家ID");
+            .appendField("ID");
         this.setOutput(true, null);
         this.setColour(190);
         this.setTooltip("");
@@ -416,8 +342,11 @@ Blockly.Blocks['b3player_id'] = {
 
 Blockly.Blocks['b3player_key'] = {
     init: function () {
+        this.appendValueInput("NAME")
+            .setCheck(null)
+            .appendField("玩家");
         this.appendDummyInput()
-            .appendField("玩家标识码");
+            .appendField("标识码");
         this.setOutput(true, null);
         this.setColour(190);
         this.setTooltip("");
@@ -427,8 +356,11 @@ Blockly.Blocks['b3player_key'] = {
 
 Blockly.Blocks['b3player_sp'] = {
     init: function () {
+        this.appendValueInput("NAME")
+            .setCheck(null)
+            .appendField("设置玩家");
         this.appendDummyInput()
-            .appendField("设置玩家出生点")
+            .appendField("出生地点")
             .appendField(new Blockly.FieldTextInput("X坐标"), "X")
             .appendField(new Blockly.FieldTextInput("Y坐标"), "Y")
             .appendField(new Blockly.FieldTextInput("Z坐标"), "Z");
@@ -443,9 +375,13 @@ Blockly.Blocks['b3player_sp'] = {
 
 Blockly.Blocks['b3player_send'] = {
     init: function () {
+        this.appendValueInput("NAME")
+            .setCheck(null)
+            .appendField("向玩家");
         this.appendValueInput("TEXT")
             .setCheck(null)
-            .appendField("私信玩家");
+            .appendField("发送私信");
+        this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(190);
@@ -456,9 +392,12 @@ Blockly.Blocks['b3player_send'] = {
 
 Blockly.Blocks['b3player_fly'] = {
     init: function () {
-        this.appendDummyInput()
+        this.appendValueInput('NAME')
             .appendField(new Blockly.FieldDropdown([["允许", "true"], ["禁止", "false"]]), "ABLE")
-            .appendField("玩家飞行");
+            .setCheck(null)
+            .appendField("玩家");
+        this.appendDummyInput()
+            .appendField("飞行");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(190);

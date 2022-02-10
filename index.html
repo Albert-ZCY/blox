@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh">
 
 <!--  by 白篮 AlbertZ -->
@@ -459,27 +459,9 @@
                 </block>
             </category>
             <category name="事件" colour="360">
-                <block type="b3event_tick_bond">
+                <block type="b3event_arg">
                 </block>
-                <block type="b3event_chat_bond">
-                </block>
-                <block type="b3event_join_bond">
-                </block>
-                <block type="b3event_leave_bond">
-                </block>
-                <block type="b3event_interact_bond">
-                </block>
-                <block type="b3event_click_bond">
-                </block>
-                <block type="b3event_press_bond">
-                </block>
-                <block type="b3event_release_bond">
-                </block>
-                <block type="b3event_entity_create_bond">
-                </block>
-                <block type="b3event_damage_bond">
-                </block>
-                <block type="b3event_die_bond">
+                <block type="b3event_world">
                 </block>
             </category>
             <category name="方块" colour="150">
@@ -491,6 +473,8 @@
                 </block>
             </category>
             <category name="实体" colour="30">
+                <block type="b3entity_get">
+                </block>
                 <block type="b3entity_mesh">
                 </block>
                 <block type="b3entity_pos">
@@ -517,7 +501,7 @@
 
         function getCookie(cname) {
             var name = cname + "=";
-            var decodedCookie = decodeURI(document.cookie);
+            var decodedCookie = decodeURIComponent(document.cookie);
             var ca = decodedCookie.split(';');
             for (var i = 0; i < ca.length; i++) {
                 var c = ca[i];

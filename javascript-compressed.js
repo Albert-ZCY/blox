@@ -94,7 +94,7 @@ Blockly.JavaScript.getAdjusted = function(a, b, c, d, e) {
         g && e >= g && (a = "(" + a + ")") }
     return a
 };
-
+var world, voxels, player, entity;
 // COLOR
 
 Blockly.JavaScript.colour = {};
@@ -693,12 +693,12 @@ Blockly.JavaScript.variables_set_dynamic = Blockly.JavaScript.variables_set;
 
 Blockly.JavaScript['b3world_project_name'] = function (block) {
     var code = 'world.projectName()';
-    return code;
+    return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['b3world_current_tick'] = function (block) {
     var code = 'world.currentTick()';
-    return code;
+    return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['b3world_say'] = function (block) {
@@ -707,107 +707,63 @@ Blockly.JavaScript['b3world_say'] = function (block) {
     return code;
 };
 
-Blockly.JavaScript['b3event_tick_bond'] = function (block) {
-    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'world.onTick(' + eval(name) + ');\n';
-    return code;
+Blockly.JavaScript['b3event_arg'] = function (block) {
+    var name = block.getFieldValue('NAME');
+    var code = name;
+    return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
-Blockly.JavaScript['b3event_chat_bond'] = function (block) {
-    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'world.onChat(' + eval(name) + ');\n';
-    return code;
-};
-
-Blockly.JavaScript['b3event_join_bond'] = function (block) {
-    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'world.onPlayerJoin(' + eval(name) + ');\n';
-    return code;
-};
-
-Blockly.JavaScript['b3event_leave_bond'] = function (block) {
-    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'world.onPlayerLeave(' + eval(name) + ');\n';
-    return code;
-};
-
-Blockly.JavaScript['b3event_interact_bond'] = function (block) {
-    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'world.onInteract(' + eval(name) + ');\n';
-    return code;
-};
-
-Blockly.JavaScript['b3event_click_bond'] = function (block) {
-    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'world.onClick(' + eval(name) + ');\n';
-    return code;
-};
-
-Blockly.JavaScript['b3event_press_bond'] = function (block) {
-    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'world.onPress(' + eval(name) + ');\n';
-    return code;
-};
-
-Blockly.JavaScript['b3event_release_bond'] = function (block) {
-    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'world.onRelease(' + eval(name) + ');\n';
+Blockly.JavaScript['b3event_world'] = function (block) {
+    var name = block.getFieldValue('NAME');
+    var func = Blockly.JavaScript.statementToCode(block, 'FUNC');
+    var events = {
+        TICK: 'world.onTick(({ tick, prevTick, elapsedTimeMS, skip })',
+        CHAT: 'world.onChat(({ entity, message, tick })',
+        JOIN: 'world.onPlayerJoin(({ entity, tick })',
+        LEAVE: 'world.onPlayerLeave(({ entity, tick })',
+        PRESS: 'world.onPress(({ button, entity, position, pressed, raycast, tick })',
+        RELEASE: 'world.onRelease(({ button, entity, position, pressed, raycast, tick })',
+        CLICK: 'world.onClick(({ entity, clicker, button, distance, clickerPosition, raycast, tick })',
+        CREATE: 'world.onEntityCreate(({ entity, tick })',
+        DAMAGE: 'world.onTakeDamage(({ entity, attacker, damage, damageType, tick })',
+        DIE: 'world.onDie(({ entity, attacker, damageType, tick })',
+        INTERACT: 'onInteract(({ entity, targetEntity, tick })'
+    };
+    var event = events[name];
+    var code = event + ' => {\n' + func + '});\n';
     return code;
 };
 
 Blockly.JavaScript['b3world_create_entity'] = function (block) {
     var config = Blockly.JavaScript.valueToCode(block, 'CONFIG', Blockly.JavaScript.ORDER_ATOMIC);
     var code = 'world.createEntity(' + eval(config) + ');\n';
-    return code;
-};
-
-Blockly.JavaScript['b3event_entity_create_bond'] = function (block) {
-    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'world.onEntityCreate(' + eval(name) + ');\n';
-    return code;
-};
-
-Blockly.JavaScript['b3event_damage_bond'] = function (block) {
-    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'world.onTakeDamage(' + eval(name) + ');\n';
-    return code;
-};
-
-Blockly.JavaScript['b3event_die_bond'] = function (block) {
-    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'world.onDie(' + eval(name) + ');\n';
-    return code;
+    return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['b3world_add_zone'] = function (block) {
     var config = Blockly.JavaScript.valueToCode(block, 'CONFIG', Blockly.JavaScript.ORDER_ATOMIC);
     var code = 'world.addZone(' + eval(config) + ')';
-    return code;
+    return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['b3world_remove_zone'] = function (block) {
     var config = Blockly.JavaScript.valueToCode(block, 'CONFIG', Blockly.JavaScript.ORDER_ATOMIC);
     var code = 'world.removeZone(' + eval(config) + ')';
-    return code;
+    return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['b3world_query'] = function (block) {
     var config = Blockly.JavaScript.valueToCode(block, 'CONFIG', Blockly.JavaScript.ORDER_ATOMIC);
     var code = 'world.querySelector(' + eval(config) + ')';
-    return code;
+    return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['b3world_query_all'] = function (block) {
     var config = Blockly.JavaScript.valueToCode(block, 'CONFIG', Blockly.JavaScript.ORDER_ATOMIC);
     var code = 'world.querySelectorAll(' + eval(config) + ')';
-    return code;
+    return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
-Blockly.JavaScript['b3event_die_bond'] = function (block) {
-    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'world.onDie(' + eval(name) + ');\n';
-    return code;
-};
 
 Blockly.JavaScript['b3world_sound'] = function (block) {
     var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
@@ -852,75 +808,95 @@ Blockly.JavaScript['b3voxels_get'] = function (block) {
     return code;
 };
 
+Blockly.JavaScript['b3entity_get'] = function (block) {
+    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+    var obj = block.getFieldValue('OBJ');
+    var objs = {PLAYER: 'player'}
+    var code = eval(name) + '.' + objs[obj];
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
 Blockly.JavaScript['b3entity_mesh'] = function (block) {
+    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'entity.mesh = ' + value + ';\n';
+    var code = eval(name) + '.mesh = ' + value + ';\n';
     return code;
 };
 
 Blockly.JavaScript['b3entity_pos'] = function (block) {
+    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var x = Number(block.getFieldValue('X'));
     var y = Number(block.getFieldValue('Y'));
     var z = Number(block.getFieldValue('Z'));
-    var code = 'entity.position = Box3Vector3(' + x + ', ' + y + ', ' + z + ');\n';
+    var code = eval(name) + '.position = Box3Vector3(' + x + ', ' + y + ', ' + z + ');\n';
     return code;
 };
 
 Blockly.JavaScript['b3entity_say'] = function (block) {
+    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'entity.say(' + text + ');\n';
+    var code = eval(name) + '.say(' + text + ');\n';
     return code;
 };
 
 Blockly.JavaScript['b3entity_enableInteract'] = function (block) {
+    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var able = eval(block.getFieldValue('ABLE'));
-    var code = 'entity.enableInteract = ' + able + ';\n';
+    var code = eval(name) + '.enableInteract = ' + able + ';\n';
     return code;
 };
 
 Blockly.JavaScript['b3entity_text'] = function (block) {
+    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'entity.interactHint = ' + text + ';\n';
+    var code = eval(name) + '.interactHint = ' + text + ';\n';
     return code;
 };
 
 Blockly.JavaScript['b3entity_destroy'] = function (block) {
+    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'entity.destroy();\n';
+    var code = eval(name) + '.destroy();\n';
     return code;
 };
 
 Blockly.JavaScript['b3player_name'] = function (block) {
-    var code = 'player.name';
-    return code;
+    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+    var code = eval(name) + '.name';
+    return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['b3player_id'] = function (block) {
-    var code = 'player.boxId';
-    return code;
+    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+    var code = eval(name) + '.boxId';
+    return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['b3player_key'] = function (block) {
-    var code = 'player.userKey';
-    return code;
+    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+    var code = eval(name) + '.userKey';
+    return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['b3player_sp'] = function (block) {
+    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var x = Number(block.getFieldValue('X'));
     var y = Number(block.getFieldValue('Y'));
     var z = Number(block.getFieldValue('Z'));
-    var code = 'player.spawnPoint = Box3Vector3(' + x + ', ' + y + ', ' + z + ');\n';
+    var code = eval(name) + '.spawnPoint = Box3Vector3(' + x + ', ' + y + ', ' + z + ');\n';
     return code;
 };
 
 Blockly.JavaScript['b3player_send'] = function (block) {
+    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'player.directMessage(' + text + ');\n';
+    var code = eval(name) + '.directMessage(' + text + ');\n';
     return code;
 };
 
 Blockly.JavaScript['b3player_fly'] = function (block) {
+    var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
     var able = eval(block.getFieldValue('ABLE'));
-    var code = 'entity.canFly = ' + able + ';\n';
+    var code = eval(name) + '.canFly = ' + able + ';\n';
     return code;
 };
