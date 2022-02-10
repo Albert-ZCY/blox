@@ -30,9 +30,11 @@
         <div class="mdui-toolbar mdui-color-grey-800" style="height: 50px !important;">
             <span class="mdui-typo-title" style="font-size: 17px;">Blox Editor 测试版</span>
             <div class="mdui-toolbar-spacer"></div>
-            <button class="mdui-btn mdui-btn-icon" onclick="showjs()" mdui-tooltip="{content: '转换代码'}" style="margin-left: 10px; border-radius: 5px;"><i class="mdui-icon material-icons">code</i></button>
+            <button class="mdui-btn mdui-btn-icon" onclick="clear()" mdui-tooltip="{content: '清除项目'}"><i class="mdui-icon material-icons">layers_clear</i></button>
+            <button class="mdui-btn mdui-btn-icon" onclick="saveWs()" mdui-tooltip="{content: '保存项目'}"><i class="mdui-icon material-icons">save</i></button>
+            <button class="mdui-btn mdui-btn-icon" onclick="showJs()" mdui-tooltip="{content: '转换代码'}"><i class="mdui-icon material-icons">code</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="runCode()" mdui-tooltip="{content: '运行程序'}"><i class="mdui-icon material-icons">play_arrow</i></button>
-            <button class="mdui-btn mdui-btn-icon" onclick="window.location.href = 'https://gitee.com/albert_zhong/blox';" mdui-tooltip="{content: '源代码下载'}"><i class="mdui-icon material-icons">file_download</i></button>
+            <button class="mdui-btn mdui-btn-icon" onclick="window.open('https://gitee.com/albert_zhong/blox');" mdui-tooltip="{content: '源代码下载'}"><i class="mdui-icon material-icons">file_download</i></button>
         </div>
     </div>
     &nbsp;
@@ -506,19 +508,60 @@
     </div>
     <!-- 以上是编辑器 -->
     <script>
-        var demoWorkspace = Blockly.inject('blocklyDiv', {
+        function setCookie(cname, cvalue, dr) {
+            var d = new Date();
+            d.setTime(d.getTime() + (dr * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ';';
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return null;
+        } 
+
+        // 定义toolbox，回显Workspace
+        var Workspace = Blockly.inject('blocklyDiv', {
             toolbox: document.getElementById('toolbox')
         });
-        //定义toolbox
-        Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), demoWorkspace);
-        var demoWorkspace = Blockly.inject('blocklyDiv', {
-            toolbox: document.getElementById('toolbox')
-        });
-        console.log(Blockly, Blockly.JavaScript);
+        var value = getCookie('workspace');
+        if (value) {
+            var xml = Blockly.Xml.textToDom(value);
+            Blockly.Xml.domToWorkspace(xml, Workspace);
+        }
+
+        function clear() {
+            Workspace.clear();
+            setCookie('workspace', '', -1000);
+            mdui.snackbar({
+                message: '项目已清除'
+            });
+        }
+
+        function saveWs() {
+            var xml = Blockly.Xml.workspaceToDom(Workspace);
+            var value = Blockly.Xml.domToText(xml);
+            setCookie('workspace', value, 30 * 24 * 60 * 60);
+            mdui.snackbar({
+                message: '项目已保存'
+            }); 
+        }
+
         //定义toolbox里面的block为既定var
-        function showjs() {
+        function showJs() {
             Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-            var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+            var code = Blockly.JavaScript.workspaceToCode(Workspace);
             //让varcode等于上面定义的东西
             showPopup(code, 'language-javascript');
             mdui.snackbar({
@@ -534,7 +577,7 @@
             popup.style.display = "table";
             textarea.className = type;
             textarea.innerHTML = code;
-            hljs.highlightAll()
+            hljs.highlightAll();
         }
 
         function closePopup() {
@@ -548,7 +591,7 @@
             window.LoopTrap = 1000;
             Blockly.JavaScript.INFINITE_LOOP_TRAP =
                 'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
-            var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+            var code = Blockly.JavaScript.workspaceToCode(Workspace);
             //还是var
             Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
             try {
