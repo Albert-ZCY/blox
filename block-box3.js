@@ -1,4 +1,58 @@
 ﻿// by Albert Z
+
+Blockly.Blocks['b3_color_rgb'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("RGB颜色 ")
+            .appendField("红：")
+            .appendField(new Blockly.FieldNumber(0, 0, 1), "R")
+            .appendField("绿：")
+            .appendField(new Blockly.FieldNumber(0, 0, 1), "G")
+            .appendField("蓝：")
+            .appendField(new Blockly.FieldNumber(0, 0, 1), "B");
+        this.setColour(10);
+        this.setOutput(true, null);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.Blocks['b3_color_rgba'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("RGBA颜色 ")
+            .appendField("红：")
+            .appendField(new Blockly.FieldNumber(0, 0, 1), "R")
+            .appendField("绿：")
+            .appendField(new Blockly.FieldNumber(0, 0, 1), "G")
+            .appendField("蓝：")
+            .appendField(new Blockly.FieldNumber(0, 0, 1), "B")
+            .appendField("透明度：")
+            .appendField(new Blockly.FieldNumber(0, 0, 1), "A");
+        this.setColour(10);
+        this.setOutput(true, null);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.Blocks['b3_vector_3'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("三维向量 ")
+            .appendField("x:")
+            .appendField(new Blockly.FieldNumber(0, 0, 1), "X")
+            .appendField("y:")
+            .appendField(new Blockly.FieldNumber(0, 0, 1), "Y")
+            .appendField("z:")
+            .appendField(new Blockly.FieldNumber(0, 0, 1), "Z");
+        this.setColour(10);
+        this.setOutput(true, null);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
 Blockly.Blocks['b3world_project_name'] = {
     init: function () {
         this.appendDummyInput()

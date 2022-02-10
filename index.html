@@ -41,7 +41,7 @@
     <div id="blocklyDiv" style="height: 500px; width: 1200px;">
         <!-- 定义编辑器主题大小 -->
         <xml id="toolbox" style="display: none">
-            <category name="判断" colour="%{BKY_LOGIC_HUE}">
+            <category name="逻辑" colour="%{BKY_LOGIC_HUE}">
                 <!-- 一堆代码盒 -->
                 <block type="controls_if">
                 </block>
@@ -51,8 +51,6 @@
                 <block type="controls_if">
                     <mutation elseif="1" else="1"></mutation>
                 </block>
-            </category>
-            <category name="逻辑" colour="%{BKY_LOGIC_HUE}">
                 <block type="logic_compare">
                 </block>
                 <block type="logic_operation">
@@ -354,58 +352,6 @@
                 </block>
                 <block type="lists_sort"></block>
             </category>
-            <category name="色彩" colour="%{BKY_COLOUR_HUE}">
-                <block type="colour_picker">
-                </block>
-                <block type="colour_random">
-                </block>
-                <block type="colour_rgb">
-                    <value name="RED">
-                        <shadow type="math_number">
-                            <field name="NUM">
-                                100
-                            </field>
-                        </shadow>
-                    </value>
-                    <value name="GREEN">
-                        <shadow type="math_number">
-                            <field name="NUM">
-                                50
-                            </field>
-                        </shadow>
-                    </value>
-                    <value name="BLUE">
-                        <shadow type="math_number">
-                            <field name="NUM">
-                                0
-                            </field>
-                        </shadow>
-                    </value>
-                </block>
-                <block type="colour_blend">
-                    <value name="COLOUR1">
-                        <shadow type="colour_picker">
-                            <field name="COLOUR">
-                                #ff0000
-                            </field>
-                        </shadow>
-                    </value>
-                    <value name="COLOUR2">
-                        <shadow type="colour_picker">
-                            <field name="COLOUR">
-                                #3333ff
-                            </field>
-                        </shadow>
-                    </value>
-                    <value name="RATIO">
-                        <shadow type="math_number">
-                            <field name="NUM">
-                                0.5
-                            </field>
-                        </shadow>
-                    </value>
-                </block>
-            </category>
             <category name="输入" colour="%{BKY_TEXTS_HUE}">
                 <block type="text"></block>
                 <block type="text_prompt_ext">
@@ -419,6 +365,14 @@
             <category name="函数" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE">
             </category>
             <sep></sep>
+            <category name="通用" colour="10">
+                <block type="b3_color_rgb">
+                </block>
+                <block type="b3_color_rgba">
+                </block>
+                <block type="b3_vector_3">
+                </block>
+            </category>
             <category name="世界" colour="120">
                 <block type="b3world_project_name">
                 </block>

@@ -689,15 +689,44 @@ Blockly.JavaScript.variables_get_dynamic = Blockly.JavaScript.variables_get;
 Blockly.JavaScript.variables_set_dynamic = Blockly.JavaScript.variables_set;
 
 // Blox ÐÂÔö
+
+Blockly.JavaScript['b3_color_rgb'] = function (block) {
+    var r = block.getFieldValue('R');
+    var g = block.getFieldValue('G');
+    var b = block.getFieldValue('B');
+    // TODO: Assemble JavaScript into code variable.
+    var code = 'new Box3RGBColor(' + r +',' + g + ',' + b + ')';
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.JavaScript['b3_color_rgba'] = function (block) {
+    var r = block.getFieldValue('R');
+    var g = block.getFieldValue('G');
+    var b = block.getFieldValue('B');
+    var a = block.getFieldValue('A');
+    // TODO: Assemble JavaScript into code variable.
+    var code = 'new Box3RGBAColor(' + r + ',' + g + ',' + b + ', ' + a + ')';
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.JavaScript['b3_vector_3'] = function (block) {
+    var x = block.getFieldValue('X');
+    var y = block.getFieldValue('Y');
+    var z = block.getFieldValue('Z');
+    // TODO: Assemble JavaScript into code variable.
+    var code = 'new Box3Vector3(' + x + ',' + y + ',' + z + ')';
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
 // WORLD
 
 Blockly.JavaScript['b3world_project_name'] = function (block) {
-    var code = 'world.projectName()';
+    var code = 'world.projectName';
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.JavaScript['b3world_current_tick'] = function (block) {
-    var code = 'world.currentTick()';
+    var code = 'world.currentTick';
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
