@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh">
 
 <!--  by 白篮 AlbertZ -->
@@ -515,33 +515,6 @@
             return null;
         } 
 
-        function encodeCookie() {
-            var key = document.cookie;
-            const encodeArr = [{
-                code: '%',
-                encode: '%25'
-            }, {
-                code: '?',
-                encode: '%3F'
-            }, {
-                code: '#',
-                encode: '%23'
-            }, {
-                code: '&',
-                encode: '%26'
-            }, {
-                code: '=',
-                encode: '%3D'
-            }];
-            return key.replace(/[%?#&=]/g, ($, index, str) => {
-                for (const k of encodeArr) {
-                    if (k.code === $) {
-                        return k.encode;
-                    }
-                }
-            });
-        }
-
         // 定义toolbox，回显Workspace
         var Workspace = Blockly.inject('blocklyDiv', {
             toolbox: document.getElementById('toolbox')
@@ -563,8 +536,7 @@
         function saveWs() {
             var xml = Blockly.Xml.workspaceToDom(Workspace);
             var value = Blockly.Xml.domToText(xml);
-            setCookie('workspace', value, 30 * 24 * 60 * 60);
-            encodeCookie();
+            setCookie('workspace', encodeURIComponent(value), 30 * 24 * 60 * 60);
             mdui.snackbar({
                 message: '项目已保存'
             }); 
