@@ -30,7 +30,7 @@
         <div class="mdui-toolbar mdui-color-grey-800" style="height: 50px !important;">
             <span class="mdui-typo-title" style="font-size: 17px;">Blox Editor 测试版</span>
             <div class="mdui-toolbar-spacer"></div>
-            <button class="mdui-btn mdui-btn-icon" onclick="clear()" mdui-tooltip="{content: '清除项目'}"><i class="mdui-icon material-icons">layers_clear</i></button>
+            <button class="mdui-btn mdui-btn-icon" onclick="clearWs()" mdui-tooltip="{content: '清除项目'}"><i class="mdui-icon material-icons">layers_clear</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="saveWs()" mdui-tooltip="{content: '保存项目'}"><i class="mdui-icon material-icons">save</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="showJs()" mdui-tooltip="{content: '转换代码'}"><i class="mdui-icon material-icons">code</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="runCode()" mdui-tooltip="{content: '运行程序'}"><i class="mdui-icon material-icons">play_arrow</i></button>
@@ -568,7 +568,7 @@
             Blockly.Xml.domToWorkspace(xml, Workspace);
         }
 
-        function clear() {
+        function clearWs() {
             Workspace.clear();
             setCookie('workspace', '', -1000);
             mdui.snackbar({
