@@ -815,7 +815,7 @@ Blockly.JavaScript['b3world_weather'] = function (block) {
 
 Blockly.JavaScript['b3voxels_shape'] = function (block) {
     var config = Blockly.JavaScript.valueToCode(block, 'CONFIG', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'voxels.shape(' + eval(config) + ');\n';
+    var code = 'voxels.shape = ' + eval(config) + ';\n';
     return code;
 };
 

@@ -13,11 +13,11 @@
     <script src="block-box3.js"></script>
     <script src="javascript-compressed.js"></script>
     <script src="zh-hans.js"></script>
+    <script src="util.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/css/mdui.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.2.0/styles/default.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/js/mdui.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-
 </head>
 
 <body>
@@ -30,11 +30,14 @@
         <div class="mdui-toolbar mdui-color-grey-800" style="height: 50px !important;">
             <span class="mdui-typo-title" style="font-size: 17px;">Blox Editor 测试版</span>
             <div class="mdui-toolbar-spacer"></div>
+            <input type="file" id="files" style="display: none" onchange="openFile()" accept=".blox">
+            <button class="mdui-btn mdui-btn-icon" onclick="document.getElementById('files').click();" mdui-tooltip="{content: '打开项目'}"><i class="mdui-icon material-icons">folder_open</i></button>
+            <button class="mdui-btn mdui-btn-icon" onclick="downloadFile()" mdui-tooltip="{content: '下载项目'}"><i class="mdui-icon material-icons">file_download</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="clearWs()" mdui-tooltip="{content: '清除项目'}"><i class="mdui-icon material-icons">layers_clear</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="saveWs()" mdui-tooltip="{content: '保存项目'}"><i class="mdui-icon material-icons">save</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="showJs()" mdui-tooltip="{content: '转换代码'}"><i class="mdui-icon material-icons">code</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="runCode()" mdui-tooltip="{content: '运行程序'}"><i class="mdui-icon material-icons">play_arrow</i></button>
-            <button class="mdui-btn mdui-btn-icon" onclick="window.open('https://gitee.com/albert_zhong/blox');" mdui-tooltip="{content: '源代码下载'}"><i class="mdui-icon material-icons">file_download</i></button>
+            <button class="mdui-btn mdui-btn-icon" onclick="window.open('https://gitee.com/albert_zhong/blox');" mdui-tooltip="{content: '源代码下载'}"><i class="mdui-icon material-icons">content_copy</i></button>
         </div>
     </div>
     &nbsp;
@@ -379,18 +382,53 @@
                 <block type="b3world_current_tick">
                 </block>
                 <block type="b3world_say">
+                    <value name="TEXT">
+                        <shadow type="text">
+                            <field name="TEXT">你好，世界！</field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3world_create_entity">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT"></field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3world_add_zone">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT"></field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3world_remove_zone">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT"></field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3world_query">
+                    <value name="CONFIG">
+                        <shadow type="text">
+                            <field name="TEXT">player</field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3world_query_all">
+                    <value name="CONFIG">
+                        <shadow type="text">
+                            <field name="TEXT">player</field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3world_sound">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT">audio/audio.mp3</field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3world_weather">
                 </block>
@@ -400,16 +438,51 @@
             </category>
             <category name="玩家" colour="190">
                 <block type="b3player_name">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT">player</field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3player_id">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT">player</field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3player_key">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT">player</field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3player_sp">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT">player</field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3player_send">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT">player</field>
+                        </shadow>
+                    </value>
+                    <value name="TEXT">
+                        <shadow type="text">
+                            <field name="TEXT">你好</field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3player_fly">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT">player</field>
+                        </shadow>
+                    </value>
                 </block>
             </category>
             <category name="事件" colour="360">
@@ -420,6 +493,11 @@
             </category>
             <category name="方块" colour="150">
                 <block type="b3voxels_shape">
+                    <value name="CONFIG">
+                        <shadow type="text">
+                            <field name="TEXT"></field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3voxels_set">
                 </block>
@@ -428,47 +506,74 @@
             </category>
             <category name="实体" colour="30">
                 <block type="b3entity_get">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT">entity</field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3entity_mesh">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT">entity</field>
+                        </shadow>
+                    </value>
+                    <value name="VALUE">
+                        <shadow type="text">
+                            <field name="TEXT"></field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3entity_pos">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT">entity</field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3entity_say">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT">entity</field>
+                        </shadow>
+                    </value>
+                    <value name="TEXT">
+                        <shadow type="text">
+                            <field name="TEXT">你好</field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3entity_enableInteract">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT">entity</field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3entity_text">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT">entity</field>
+                        </shadow>
+                    </value>
+                    <value name="TEXT">
+                        <shadow type="text">
+                            <field name="TEXT">你好</field>
+                        </shadow>
+                    </value>
                 </block>
                 <block type="b3entity_destroy">
+                    <value name="NAME">
+                        <shadow type="text">
+                            <field name="TEXT">entity</field>
+                        </shadow>
+                    </value>
                 </block>
             </category>
         </xml>
     </div>
     <!-- 以上是编辑器 -->
     <script>
-        function setCookie(cname, cvalue, dr) {
-            var d = new Date();
-            d.setTime(d.getTime() + (dr * 1000));
-            var expires = "expires=" + d.toUTCString();
-            document.cookie = cname + "=" + cvalue + ";" + expires + ';';
-        }
-
-        function getCookie(cname) {
-            var name = cname + "=";
-            var decodedCookie = decodeURIComponent(document.cookie);
-            var ca = decodedCookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return null;
-        } 
-
         // 定义toolbox，回显Workspace
         var Workspace = Blockly.inject('blocklyDiv', {
             toolbox: document.getElementById('toolbox')
@@ -477,6 +582,38 @@
         if (value) {
             var xml = Blockly.Xml.textToDom(value);
             Blockly.Xml.domToWorkspace(xml, Workspace);
+        }
+
+        function openFile() {
+            var file = document.getElementById('files').files[0];
+            var name = file.name;
+            var size = file.size;
+            var reader = new FileReader();
+            reader.readAsText(file);
+            try {
+                reader.onload = function () {
+                    var xml = Blockly.Xml.textToDom(decodeURIComponent(this.result));
+                    Blockly.Xml.domToWorkspace(xml, Workspace);
+                }
+                mdui.snackbar({
+                    message: '项目已打开'
+                });
+            } catch (e) {
+                mdui.snackbar({
+                    message: '项目打开失败'
+                });
+            }
+        }
+
+        function downloadFile() {
+            var xml = Blockly.Xml.workspaceToDom(Workspace);
+            var value = Blockly.Xml.domToText(xml);
+            var file = new File([encodeURIComponent(value)], "project.blox", { type: "text/plain;charset=utf-8" });
+            saveAs(file);
+            eval(code);
+            mdui.snackbar({
+                message: '项目已下载，如未弹出下载窗口请反馈给编辑器作者'
+            });
         }
 
         function clearWs() {
@@ -546,5 +683,4 @@
             }
     </script>
 </body>
-
 </html>
