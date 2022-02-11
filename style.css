@@ -1,0 +1,68 @@
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 999;
+}
+
+popup {
+    display: none;
+    position: absolute;
+    overflow: auto;
+    top: calc(50% - 80% / 2 - 1%);
+    left: calc(50% - 60% / 2);
+    width: 60%;
+    height: 80%;
+    background-color: #fefefe;
+    z-index: 1000;
+}
+
+pre {
+    height: calc(100% - 80px);
+    max-width: 100%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+code {
+    font-size: 16px;
+    font-family: Courier New;
+    display: block;
+    margin-top: 35px;
+    height: 100%;
+    padding: 30px;
+    overflow: auto;
+    word-wrap: break-word;
+    max-width: 100%;
+    white-space: pre-wrap;
+}
+
+.btn-close {
+    font-size: 27px;
+    text-decoration: none;
+    position: absolute;
+    color: #101010;
+    top: 2px;
+    right: 7px;
+}
+
+.blocklySvg, body, .holder {
+    background-color: #F5F9FF;
+}
+
+.blocklyFlyoutBackground {
+    fill: #F5F9FF !important;
+    opacity: 0.9;
+}
+
+.blocklyFlyout {
+    box-shadow: 3px 0px 3px #aaaaaa;
+}
+
+.blocklyToolboxDiv {
+    fill: #FFFFFF !important;
+}

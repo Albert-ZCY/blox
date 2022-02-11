@@ -1,5 +1,5 @@
-//rewrite by 白篮
-//是改过的
+//rewrite by 白篮 AlbertZ
+
 var Blockly = { constants: {}, LINE_MODE_MULTIPLIER: 40, PAGE_MODE_MULTIPLIER: 125, DRAG_RADIUS: 5, FLYOUT_DRAG_RADIUS: 10, SNAP_RADIUS: 28 };
 Blockly.CONNECTING_SNAP_RADIUS = Blockly.SNAP_RADIUS;
 Blockly.CURRENT_CONNECTION_PREFERENCE = 8;
@@ -8122,8 +8122,8 @@ Blockly.HorizontalFlyout.prototype.position = function() {
 Blockly.HorizontalFlyout.prototype.setBackgroundPath_ = function(a, b) {
     var c = this.toolboxPosition_ == Blockly.TOOLBOX_AT_TOP,
         d = ["M 0," + (c ? 0 : this.CORNER_RADIUS)];
-    c ? (d.push("h", a + 2 * this.CORNER_RADIUS), d.push("v", b), d.push("a", this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0, 1, -this.CORNER_RADIUS, this.CORNER_RADIUS), d.push("h", -a), d.push("a", this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0, 1, -this.CORNER_RADIUS, -this.CORNER_RADIUS)) : (d.push("a", this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0, 1, this.CORNER_RADIUS, -this.CORNER_RADIUS),
-        d.push("h", a), d.push("a", this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0, 1, this.CORNER_RADIUS, this.CORNER_RADIUS), d.push("v", b), d.push("h", -a - 2 * this.CORNER_RADIUS));
+       c ? (d.push("h", a + 2 * this.CORNER_RADIUS), d.push("v", b), d.push("a", this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0, 1, -this.CORNER_RADIUS, this.CORNER_RADIUS), d.push("h", -a), d.push("a", this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0, 1, -this.CORNER_RADIUS, -this.CORNER_RADIUS)) : (d.push("a", this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0, 1, this.CORNER_RADIUS, -this.CORNER_RADIUS),
+       d.push("h", a), d.push("a", this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0, 1, this.CORNER_RADIUS, this.CORNER_RADIUS), d.push("v", b), d.push("h", -a - 2 * this.CORNER_RADIUS));
     d.push("z");
     this.svgBackground_.setAttribute("d", d.join(" "))
 };
