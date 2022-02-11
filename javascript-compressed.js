@@ -690,6 +690,47 @@ Blockly.JavaScript.variables_set_dynamic = Blockly.JavaScript.variables_set;
 
 // Blox ÐÂÔö
 
+Blockly.JavaScript['debug_out'] = function (block) {
+    var text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
+    var code = 'console.log(' + text + ');\n';
+    return code;
+};
+
+Blockly.JavaScript['debug_warn'] = function (block) {
+    var text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
+    var code = 'console.warn(' + text + ');\n';
+    return code;
+};
+
+Blockly.JavaScript['debug_error'] = function (block) {
+    var text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
+    var code = 'console.error(' + text + ');\n';
+    return code;
+};
+
+Blockly.JavaScript['debug_clear'] = function (block) {
+    var code = 'console.clear();\n';
+    return code;
+};
+
+Blockly.JavaScript['debug_comment'] = function (block) {
+    var text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
+    var code = '// ' + text.substring(1, text.length-1) + '\n';
+    return code;
+};
+
+Blockly.JavaScript['debug_t'] = function (block) {
+    var code = 'console.time();\n';
+    return code;
+};
+
+Blockly.JavaScript['debug_te'] = function (block) {
+    var text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
+    var code = 'console.timeEnd();\n';
+    return code;
+};
+
+
 Blockly.JavaScript['b3_color_rgb'] = function (block) {
     var r = block.getFieldValue('R');
     var g = block.getFieldValue('G');

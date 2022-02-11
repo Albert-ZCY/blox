@@ -24,7 +24,7 @@
     <div class="overlay" style="display: none; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); z-index: 999;"></div>
     <popup style="display: none; position: absolute; overflow: auto; top: calc(50% - 80% / 2 - 1%); left: calc(50% - 60% / 2); width: 60%; height: 80%; background-color: #fefefe; z-index: 1000;">
         <a style="font-size: 27px; text-decoration: none; position: absolute; color: #101010; top: 2px; right: 7px;" href="javascript:closePopup();"t class="btn-close">×</a>
-        <pre style="height: calc(100% - 80px); max-width: 100%; white-space: pre-wrap; word-wrap: break-word;"><code style="font-size: 16px; font-family: Courier New; display: block; margin-top: 35px; height: 100%; padding: 30px; overflow: auto; word-wrap: break-word; max-width: 100%; white-space: pre-wrap;"></code></pre>
+        <pre style="height: calc(100% - 80px); max-width: 100%; white-space: pre-wrap; word-wrap: break-word;"><code id="code" style="font-size: 16px; font-family: Courier New; display: block; margin-top: 35px; height: 100%; padding: 30px; overflow: auto; word-wrap: break-word; max-width: 100%; white-space: pre-wrap;"></code></pre>
     </popup>
     <div class="mdui-appbar">
         <div class="mdui-toolbar mdui-color-grey-800" style="height: 50px !important;">
@@ -367,6 +367,42 @@
             </category>
             <category name="函数" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE">
             </category>
+            <category name="调试" colour="200">
+                <block type="debug_out">
+                    <value name="TEXT">
+                        <shadow type="text">
+                            <field name="TEXT">调试中...</field>
+                        </shadow>
+                    </value>
+                </block>
+                <block type="debug_warn">
+                    <value name="TEXT">
+                        <shadow type="text">
+                            <field name="TEXT">警告提示</field>
+                        </shadow>
+                    </value>
+                </block>
+                <block type="debug_error">
+                    <value name="TEXT">
+                        <shadow type="text">
+                            <field name="TEXT">错误</field>
+                        </shadow>
+                    </value>
+                </block>
+                <block type="debug_clear">
+                </block>
+                <block type="debug_comment">
+                    <value name="TEXT">
+                        <shadow type="text">
+                            <field name="TEXT">说明</field>
+                        </shadow>
+                    </value>
+                </block>
+                <block type="debug_t">
+                </block>
+                <block type="debug_te">
+                </block>
+            </category>
             <sep></sep>
             <category name="通用" colour="10">
                 <block type="b3_color_rgb">
@@ -637,7 +673,7 @@
         //定义toolbox里面的block为既定var
         function showJs() {
             Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-            var code = Blockly.JavaScript.workspaceToCode(Workspace);
+            var code = Blockly.JavaScript.workspaceToCode(Workspace) + '\n// 由 https://bloxeditor.vercel.app/ 生成';
             //让varcode等于上面定义的东西
             showPopup(code, 'language-javascript');
             mdui.snackbar({

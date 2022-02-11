@@ -1965,3 +1965,100 @@ Blockly.Constants.VariablesDynamic.DELETE_OPTION_CALLBACK_FACTORY = function(a) 
     }
 };
 Blockly.Extensions.registerMixin("contextMenu_variableDynamicSetterGetter", Blockly.Constants.VariablesDynamic.CUSTOM_CONTEXT_MENU_VARIABLE_GETTER_SETTER_MIXIN);
+
+// add from here
+
+Blockly.Blocks['debug_out'] = {
+    init: function () {
+        this.appendValueInput("TEXT")
+            .setCheck("String")
+            .appendField("调试输出");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(200);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.Blocks['debug_warn'] = {
+    init: function () {
+        this.appendValueInput("TEXT")
+            .setCheck("String")
+            .appendField("警告");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(200);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.Blocks['debug_error'] = {
+    init: function () {
+        this.appendValueInput("TEXT")
+            .setCheck("String")
+            .appendField("错误");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(200);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.Blocks['debug_clear'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField('清除调试信息');
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(200);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.Blocks['debug_comment'] = {
+    init: function () {
+        this.appendValueInput("TEXT")
+            .setCheck("String")
+            .appendField("注释");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(200);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.Blocks['debug_t'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField('开始计时');
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(200);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.Blocks['debug_te'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField('停止计时');
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(200);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
