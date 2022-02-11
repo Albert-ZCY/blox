@@ -611,13 +611,14 @@
     </div>
     <!-- 以上是编辑器 -->
     <script>
+        var storage = window.localStorage;
+
         // 定义toolbox，回显Workspace
         var Workspace = Blockly.inject('blocklyDiv', {
             toolbox: document.getElementById('toolbox')
         });
-        var value = getCookie('workspace');
-        if (value) {
-            var xml = Blockly.Xml.textToDom(value);
+        if (storage.workspace) {
+            var xml = Blockly.Xml.textToDom(decodeURIComponent(storage.workspace));
             Blockly.Xml.domToWorkspace(xml, Workspace);
         }
 
@@ -656,7 +657,8 @@
 
         function clearWs() {
             Workspace.clear();
-            setCookie('workspace', '', -1000);
+            if (storage.workspace)
+                storage.workspace = null;
             mdui.snackbar({
                 message: '项目已清除'
             });
@@ -665,7 +667,7 @@
         function saveWs() {
             var xml = Blockly.Xml.workspaceToDom(Workspace);
             var value = Blockly.Xml.domToText(xml);
-            setCookie('workspace', encodeURIComponent(value), 30 * 24 * 60 * 60);
+            storage.workspace = encodeURIComponent(value);
             mdui.snackbar({
                 message: '项目已保存'
             }); 
