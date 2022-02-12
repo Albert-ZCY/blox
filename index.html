@@ -41,8 +41,7 @@
             <button class="mdui-btn mdui-btn-icon" onclick="window.open('https://github.com/Albert-ZCY/blox');" mdui-tooltip="{content: '源代码下载'}"><i class="mdui-icon material-icons">content_copy</i></button>
         </div>
     </div>
-    <div class="holder">&nbsp;</div>
-    <div id="blocklyDiv" style="height: calc(100vh - 70px); width: calc(100vw - 10px);">
+    <div id="blocklyDiv" style="height: calc(100vh - 60px); width: calc(100vw - 5px);">
         <!-- 定义编辑器主题大小 -->
         <xml id="toolbox" style="display: none">
             <category name="逻辑" colour="%{BKY_LOGIC_HUE}">
@@ -614,9 +613,18 @@
         var storage = window.localStorage;
 
         // 定义toolbox，回显Workspace
-        var Workspace = Blockly.inject('blocklyDiv', {
-            toolbox: document.getElementById('toolbox')
-        });
+        var Workspace = Blockly.inject('blocklyDiv',
+            {
+                toolbox: document.getElementById('toolbox'),
+                grid:     // 网格
+                {
+                    spacing: 20,
+                    length: 3,
+                    colour: '#ccc',
+                    snap: true
+                },
+                trashcan: true
+            });
         if (storage.workspace) {
             var xml = Blockly.Xml.textToDom(decodeURIComponent(storage.workspace));
             Blockly.Xml.domToWorkspace(xml, Workspace);
