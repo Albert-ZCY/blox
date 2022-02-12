@@ -67,12 +67,12 @@ code {
     fill: #FFFFFF !important;
 }
 
-.geras-renderer.classic-theme .blocklySelected > .blocklyPath {
+.custom-renderer-renderer.classic-theme .blocklySelected > .blocklyPath {
     stroke: #bdf6fbf5;
     stroke-width: 3px;
 }
 
-.geras-renderer.classic-theme .blocklyHighlightedConnectionPath {
+.custom-renderer-renderer.classic-theme .blocklyHighlightedConnectionPath {
     stroke: #bdf6fbf5;
     stroke-width: 3px;
 }
