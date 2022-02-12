@@ -14,6 +14,7 @@
     <script src="javascript-compressed.js"></script>
     <script src="zh-hans.js"></script>
     <script src="util.js"></script>
+    <script src="custom-renderer.js"></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/css/mdui.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.2.0/styles/default.min.css" />
@@ -623,7 +624,7 @@
                     colour: '#ccc',
                     snap: true
                 },
-                trashcan: true
+                renderer: 'custom-renderer',
             });
         if (storage.workspace) {
             var xml = Blockly.Xml.textToDom(decodeURIComponent(storage.workspace));
