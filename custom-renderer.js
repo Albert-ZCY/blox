@@ -13,10 +13,21 @@ CustomConstantsProvider = function () {
     // The height of the notch used for previous and next connections.
     this.NOTCH_HEIGHT = 0;
     // Rounded corner radius.
-    this.CORNER_RADIUS = 14;
+    this.CORNER_RADIUS = 10;
     // The height of the puzzle tab used for input and output connections.
-    this.TAB_HEIGHT = 0;
+    this.TAB_HEIGHT = 25;
     this.TAB_WIDTH = 0;
+    this.STATEMENT_INPUT_NOTCH_OFFSET = this.NOTCH_OFFSET_LEFT = 15;
+    this.STATEMENT_INPUT_PADDING_LEFT = 20;
+    this.BETWEEN_STATEMENT_PADDING_Y = 4;
+    this.MIN_BLOCK_HEIGHT = 20;
+    this.FIELD_BORDER_RECT_X_PADDING = 5;
+    this.FIELD_BORDER_RECT_Y_PADDING = 3;
+    this.FIELD_BORDER_RECT_COLOUR = "#F5F9FF";
+    this.EMPTY_INLINE_INPUT_PADDING = 17;
+    this.EMPTY_INLINE_INPUT_HEIGHT = 27;
+    this.EXTERNAL_VALUE_INPUT_PADDING = 2;
+    this.EMPTY_STATEMENT_INPUT_HEIGHT = 25;
 };
 Blockly.utils.object.inherits(CustomConstantsProvider,
     Blockly.blockRendering.ConstantProvider);

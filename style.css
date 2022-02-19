@@ -91,3 +91,8 @@ code {
     background-color: #F5F9FF;
     opacity: 0.9;
 }
+
+.blocklyDropDownDiv, .blocklyDropDownArrow {
+    background-color: #F5F9FF;
+    opacity: 0.93 !important;
+}

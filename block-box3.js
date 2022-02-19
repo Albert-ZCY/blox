@@ -53,6 +53,36 @@ Blockly.Blocks['b3_vector_3'] = {
     }
 };
 
+Blockly.Blocks['b3_async'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("同步执行");
+        this.appendStatementInput("CODE")
+            .setCheck(null);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(10);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.Blocks['b3_sleep'] = {
+    init: function () {
+        this.appendValueInput("TIME")
+            .setCheck("Number")
+            .appendField("等待");
+        this.appendDummyInput()
+            .appendField("秒");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(10);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
 Blockly.Blocks['b3world_project_name'] = {
     init: function () {
         this.appendDummyInput()
