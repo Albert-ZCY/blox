@@ -28,11 +28,11 @@
     </div>
     <div class="mdui-appbar">
         <div class="mdui-toolbar mdui-color-grey-800" style="height: 50px !important;">
-            <span class="mdui-typo-title" style="font-size: 17px;">Blox Editor 测试版</span>
+            <span class="mdui-typo-title" id="title" style="font-size: 17px;">Blox Editor 测试版</span>
             <div class="mdui-toolbar-spacer"></div>
             <input type="file" id="files" style="display: none" onchange="openFile()" accept=".blox">
-            <button class="mdui-btn mdui-btn-icon" onclick="document.getElementById('files').click();" mdui-tooltip="{content: '打开项目'}"><i class="mdui-icon material-icons">folder_open</i></button>
-            <button class="mdui-btn mdui-btn-icon" onclick="downloadFile()" mdui-tooltip="{content: '下载项目'}"><i class="mdui-icon material-icons">file_download</i></button>
+            <button class="mdui-btn mdui-btn-icon" id="btn-open" onclick="document.getElementById('files').click();" mdui-tooltip="{content: '打开项目'}"><i class="mdui-icon material-icons">folder_open</i></button>
+            <button class="mdui-btn mdui-btn-icon" id="btn-down" onclick="downloadFile()" mdui-tooltip="{content: '导出项目'}"><i class="mdui-icon material-icons">file_download</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="clearWs()" mdui-tooltip="{content: '清除项目'}"><i class="mdui-icon material-icons">layers_clear</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="saveWs()" mdui-tooltip="{content: '保存项目'}"><i class="mdui-icon material-icons">save</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="showJs()" mdui-tooltip="{content: '转换代码'}"><i class="mdui-icon material-icons">code</i></button>
@@ -618,6 +618,7 @@
     </div>
     <!-- 以上是编辑器 -->
     <script>
+        // 初始化
         var storage = window.localStorage;
         var dialog = new mdui.Dialog('#dialog');
         // 定义toolbox，回显Workspace
@@ -636,6 +637,12 @@
         if (storage.workspace) {
             var xml = Blockly.Xml.textToDom(decodeURIComponent(storage.workspace));
             Blockly.Xml.domToWorkspace(xml, Workspace);
+        }
+        // 移动端适应
+        if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone)/i))) {
+            document.getElementById('title').innerHTML = 'BE移动版';
+            document.getElementById('btn-open').style.display = 'none';
+            document.getElementById('btn-down').style.display = 'none';
         }
 
         function openFile() {
