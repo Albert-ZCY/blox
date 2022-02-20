@@ -9,20 +9,20 @@
     z-index: 999;
 }
 
-popup {
-    display: none;
-    position: absolute;
+#dialog {
     overflow: auto;
-    top: calc(50% - 80% / 2 - 1%);
-    left: calc(50% - 60% / 2);
-    width: 60%;
-    height: 80%;
     background-color: #fefefe;
-    z-index: 1000;
+    padding-top: 10px;
+}
+
+.about {
+    margin-left: 20px;
+    min-height: 300px;
+    color: #000000aa;
 }
 
 pre {
-    height: calc(100% - 80px);
+    height: 90%;
     max-width: 100%;
     white-space: pre-wrap;
     word-wrap: break-word;
@@ -32,7 +32,7 @@ code {
     font-size: 16px;
     font-family: Courier New;
     display: block;
-    margin-top: 35px;
+    margin-top: 10px;
     height: 100%;
     padding: 30px;
     overflow: auto;
