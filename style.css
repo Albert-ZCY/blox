@@ -29,6 +29,7 @@ pre {
 }
 
 code {
+    min-height: 300px;
     font-size: 16px;
     font-family: Courier New;
     display: block;
