@@ -23,11 +23,9 @@
 </head>
 
 <body>
-    <div class="overlay"></div>
-    <popup>
-        <a href="javascript:closePopup();" class="btn-close">×</a>
-        <pre><code></code></pre>
-    </popup>
+    <div class="overlay" onclick="closePopup()"></div>
+    <div class="mdui-dialog" id="dialog">
+    </div>
     <div class="mdui-appbar">
         <div class="mdui-toolbar mdui-color-grey-800" style="height: 50px !important;">
             <span class="mdui-typo-title" style="font-size: 17px;">Blox Editor 测试版</span>
@@ -39,7 +37,7 @@
             <button class="mdui-btn mdui-btn-icon" onclick="saveWs()" mdui-tooltip="{content: '保存项目'}"><i class="mdui-icon material-icons">save</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="showJs()" mdui-tooltip="{content: '转换代码'}"><i class="mdui-icon material-icons">code</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="runCode()" mdui-tooltip="{content: '运行程序'}"><i class="mdui-icon material-icons">play_arrow</i></button>
-            <button class="mdui-btn mdui-btn-icon" onclick="window.open('https://github.com/Albert-ZCY/blox');" mdui-tooltip="{content: '源代码下载'}"><i class="mdui-icon material-icons">content_copy</i></button>
+            <button class="mdui-btn mdui-btn-icon" onclick="aboutWin();" mdui-tooltip="{content: '关于'}"><i class="mdui-icon material-icons">content_copy</i></button>
         </div>
     </div>
     <div id="blocklyDiv" style="height: calc(100vh - 60px); width: calc(100vw - 5px);">
@@ -621,7 +619,7 @@
     <!-- 以上是编辑器 -->
     <script>
         var storage = window.localStorage;
-
+        var dialog = new mdui.Dialog('#dialog');
         // 定义toolbox，回显Workspace
         var Workspace = Blockly.inject('blocklyDiv',
             {
@@ -696,20 +694,30 @@
             Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
             var code = Blockly.JavaScript.workspaceToCode(Workspace) + '\n// 由 https://bloxeditor.vercel.app/ 生成';
             //让varcode等于上面定义的东西
-            showPopup(code, 'language-javascript');
+            var inner = '<pre><code type="language-javascript">' + code + '</code></pre>';
+            showPopup(inner);
             mdui.snackbar({
                 message: '代码已经生成，如果没有代码弹出框请反馈给编辑器作者'
             });
         }
 
-        function showPopup(code, type) {
-            var popup = document.getElementsByTagName('popup')[0];
-            var overlay = document.getElementsByClassName('overlay')[0];
-            var textarea = popup.getElementsByTagName('code')[0];
-            overlay.style.display = 'block';
-            popup.style.display = "table";
-            textarea.className = type;
-            textarea.innerHTML = code;
+        function aboutWin() {
+            var inner = '<div class="about">\
+                        <h2>Blox Editor 测试版</h2>\
+                        <p>基于Blockly&eblock，支持JavaScript&Box3的mdui主题图形化编辑器</p>\
+                        <p>最新版本：v0.8.2</p>\
+                        <p>作者：Albert钟</p>\
+                        <p>项目地址：https://github.com/Albert-ZCY/blox <br>\
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; https://gitee.com/albert_zhong/blox </p>\
+                        <p>分发协议：Apache2.0</p>\
+                        </div>';
+            showPopup(inner);
+        }
+
+        function showPopup(inner) {
+            var popup = document.getElementById('dialog');
+            popup.innerHTML = inner;
+            dialog.open();
             hljs.highlightAll();
         }
 
