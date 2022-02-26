@@ -36,7 +36,7 @@
             <button class="mdui-btn mdui-btn-icon" onclick="clearWs()" mdui-tooltip="{content: '清除项目'}"><i class="mdui-icon material-icons">layers_clear</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="saveWs()" mdui-tooltip="{content: '保存项目'}"><i class="mdui-icon material-icons">save</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="showJs()" mdui-tooltip="{content: '转换代码'}"><i class="mdui-icon material-icons">code</i></button>
-            <button class="mdui-btn mdui-btn-icon" onclick="runCode()" mdui-tooltip="{content: '运行程序'}"><i class="mdui-icon material-icons">play_arrow</i></button>
+            <button class="mdui-btn mdui-btn-icon" onclick="runCode()" mdui-tooltip="{content: '调试程序'}"><i class="mdui-icon material-icons">play_arrow</i></button>
             <button class="mdui-btn mdui-btn-icon" onclick="aboutWin();" mdui-tooltip="{content: '关于'}"><i class="mdui-icon material-icons">content_copy</i></button>
         </div>
     </div>
@@ -621,11 +621,20 @@
         // 初始化
         var storage = window.localStorage;
         var dialog = new mdui.Dialog('#dialog');
-        // 定义toolbox，回显Workspace
+        var about = '<div class="about">\
+                        <h2>Blox Editor 测试版</h2>\
+                        <p>基于Blockly&eblock，支持JavaScript&Box3的mdui主题图形化编辑器</p>\
+                        <p>最新版本：v0.9.0 正式版预览</p>\
+                        <p>作者：Albert</p>\
+                        <p>项目地址：https://github.com/Albert-ZCY/blox <br>\
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; https://gitee.com/albert_zhong/blox </p>\
+                        <p>分发协议：Apache2.0</p>\
+                    </div>';
+        // 定义toolbox
         var Workspace = Blockly.inject('blocklyDiv',
             {
                 toolbox: document.getElementById('toolbox'),
-                grid:     // 网格
+                grid:
                 {
                     spacing: 20,
                     length: 3,
@@ -634,6 +643,7 @@
                 },
                 renderer: 'custom-renderer',
             });
+        // 回显Workspace
         if (storage.workspace) {
             var xml = Blockly.Xml.textToDom(decodeURIComponent(storage.workspace));
             Blockly.Xml.domToWorkspace(xml, Workspace);
@@ -698,26 +708,24 @@
 
         //定义toolbox里面的block为既定var
         function showJs() {
-            Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-            var code = Blockly.JavaScript.workspaceToCode(Workspace) + '\n// 由 https://bloxeditor.vercel.app/ 生成';
-            //让varcode等于上面定义的东西
-            var inner = '<pre><code type="language-javascript">' + code + '</code></pre>';
-            showPopup(inner);
-            mdui.snackbar({
-                message: '代码已经生成，如果没有代码弹出框请反馈给编辑器作者'
-            });
+            try {
+                Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+                var code = Blockly.JavaScript.workspaceToCode(Workspace) + '\n// 由 https://bloxeditor.vercel.app/ 生成';
+                //让varcode等于上面定义的东西
+                var inner = '<pre><code type="language-javascript">' + code + '</code></pre>';
+                showPopup(inner);
+                mdui.snackbar({
+                    message: '代码已生成'
+                });
+            } catch (e) {
+                mdui.snackbar({
+                    message: '代码生成错误，请反馈给开发者处理'
+                });
+            }
         }
 
         function aboutWin() {
-            var inner = '<div class="about">\
-                        <h2>Blox Editor 测试版</h2>\
-                        <p>基于Blockly&eblock，支持JavaScript&Box3的mdui主题图形化编辑器</p>\
-                        <p>最新版本：v0.8.2</p>\
-                        <p>作者：Albert钟</p>\
-                        <p>项目地址：https://github.com/Albert-ZCY/blox <br>\
-                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; https://gitee.com/albert_zhong/blox </p>\
-                        <p>分发协议：Apache2.0</p>\
-                        </div>';
+            var inner = about;
             showPopup(inner);
         }
 
@@ -745,12 +753,12 @@
             try {
                 eval(code);
                 mdui.snackbar({
-                    message: '代码已经运行，如果没有代码弹出框请反馈给编辑器作者'
+                    message: '代码调试完成 无报错'
                 });
             } catch (e) {
                 alert(e);
                 mdui.snackbar({
-                    message: '运行错误'
+                    message: '代码运行错误'
                 });
                 }
             }

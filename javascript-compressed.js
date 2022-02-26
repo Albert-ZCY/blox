@@ -759,6 +759,19 @@ Blockly.JavaScript['b3_vector_3'] = function (block) {
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
+Blockly.JavaScript['b3_async'] = function (block) {
+    var scode = Blockly.JavaScript.statementToCode(block, 'CODE');
+    var code = '(async function () { \n' + scode + '})();\n';
+    return code;
+};
+
+Blockly.JavaScript['b3_sleep'] = function (block) {
+    var time = Blockly.JavaScript.valueToCode(block, 'TIME', Blockly.JavaScript.ORDER_ATOMIC);
+    // TODO: Assemble JavaScript into code variable.
+    var code = 'await sleep(' + (Number(time) *1000) + ');\n';
+    return code;
+};
+
 // WORLD
 
 Blockly.JavaScript['b3world_project_name'] = function (block) {
