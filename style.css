@@ -14,6 +14,7 @@
     background-color: #fefefe;
     padding-top: 10px;
     min-height: 400px;
+    overflow-x: hidden;
 }
 
 .about {
@@ -106,4 +107,14 @@ code {
 
 .goog-menuitem-highlight {
     background-color: #ffffffdd !important;
+}
+
+.footer {
+    position: absolute;
+    background-color: #707070;
+    color: white;
+    width: 100%;
+    bottom: 0px;
+    padding: 15px;
+    text-align: center;
 }
