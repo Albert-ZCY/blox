@@ -29,7 +29,6 @@ CustomConstantsProvider = function () {
     this.FIELD_BORDER_RECT_COLOUR = "#F5F9FF";
     this.EMPTY_INLINE_INPUT_PADDING = 17;
     this.EMPTY_INLINE_INPUT_HEIGHT = 25;
-    this.EXTERNAL_VALUE_INPUT_PADDING = 2;
     this.EMPTY_STATEMENT_INPUT_HEIGHT = 25;
 };
 

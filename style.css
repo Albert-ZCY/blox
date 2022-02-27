@@ -19,7 +19,8 @@
 .about {
     margin-top: 20px;
     margin-left: 30px;
-    color: #000000aa;
+    margin-right: 15px;
+    color: #000c;
 }
 
 pre {
@@ -90,10 +91,19 @@ code {
 
 .blocklyToolboxDiv {
     background-color: #F5F9FF;
-    opacity: 0.9;
+    opacity: 0.93;
 }
 
 .blocklyDropDownDiv, .blocklyDropDownArrow {
     background-color: #F5F9FF;
     opacity: 0.93 !important;
+}
+
+.goog-menu {
+    background-color: #F5F9FF !important;
+    opacity: 0.93;
+}
+
+.goog-menuitem-highlight {
+    background-color: #ffffffdd !important;
 }
