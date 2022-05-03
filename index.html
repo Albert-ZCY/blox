@@ -23,7 +23,6 @@
 </head>
 
 <body class="mdui-theme-accent-indigo">
-    <div class="overlay" onclick="closePopup()"></div>
     <div class="mdui-dialog" id="dialog">
     </div>
     <div class="mdui-appbar">
@@ -837,14 +836,13 @@
 
         function showPopup(inner) {
             var popup = $('#dialog');
-            popup.text(inner);
+            popup.html(inner);
             dialog.open();
             hljs.highlightAll();
         }
 
         function closePopup() {
-            var popup = $('popup');
-            var overlay = $('#overlay');
+            var popup = $('#dialog');
             overlay.css('display', 'none');
             popup.css('display', 'none');
         }
