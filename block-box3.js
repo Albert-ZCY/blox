@@ -148,6 +148,25 @@ Blockly.Blocks['b3event_world'] = {
     }
 };
 
+Blockly.Blocks['b3event_entity'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("当 实体 ")
+            .appendField(new Blockly.FieldTextInput("entity"), "ENTITY")
+            .appendField("触发")
+            .appendField(new Blockly.FieldDropdown([["点击事件", "CLICK"], ["触碰实体", "ECONTACT"], ["停止触碰实体", "ESEPARATE"], ["进入液体", "FENTER"], ["离开液体", "FLEAVE"], ["进行互动", "INTERACT"], ["触碰方块", "VCONTACT"], ["停止触碰方块", "CSEPARATE"]]), "NAME")
+            .appendField("事件")
+        this.appendStatementInput("FUNC")
+            .setCheck(null)
+            .appendField("执行");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(0);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
 Blockly.Blocks['b3world_create_entity'] = {
     init: function () {
         this.appendValueInput("CONFIG")

@@ -810,10 +810,29 @@ Blockly.JavaScript['b3event_world'] = function (block) {
         CREATE: 'world.onEntityCreate(({ entity, tick })',
         DAMAGE: 'world.onTakeDamage(({ entity, attacker, damage, damageType, tick })',
         DIE: 'world.onDie(({ entity, attacker, damageType, tick })',
-        INTERACT: 'onInteract(({ entity, targetEntity, tick })'
+        INTERACT: 'world.onInteract(({ entity, targetEntity, tick })'
     };
     var event = events[name];
     var code = event + ' => {\n' + func + '});\n';
+    return code;
+};
+
+Blockly.JavaScript['b3event_entity'] = function (block) {
+    var ett = block.getFieldValue('ENTITY');
+    var name = block.getFieldValue('NAME');
+    var func = Blockly.JavaScript.statementToCode(block, 'FUNC');
+    var events = {
+        CLICK: '.onClick(({ tick })',
+        ECONTACT: '.onEntityContact(({  entity, tick  })',
+        ESEPARATE: '.onEntitySeparate(({  entity, tick  })',
+        FENTER: '.onFluidEnter(({  entity, tick  })',
+        FLEAVE: '.onFluidLeave(({  entity, tick  })',
+        INTERACT: '.onInteract(({  entity, tick  })',
+        VCONTACT: '.onVoxelContact(({  entity, tick  })',
+        VSEPARATE: '.onVoxelSeparate(({ entity, tick })',
+    };
+    var event = events[name];
+    var code = ett + event + ' => {\n' + func + '});\n';
     return code;
 };
 
