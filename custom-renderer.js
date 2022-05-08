@@ -20,8 +20,9 @@ CustomConstantsProvider = function () {
     this.JAGGED_TEETH_HEIGHT = 0;
     this.JAGGED_TEETH_WIDTH = 0;
     
-    this.STATEMENT_INPUT_NOTCH_OFFSET = this.NOTCH_OFFSET_LEFT = 15;
-    this.STATEMENT_INPUT_PADDING_LEFT = 20;
+    this.STATEMENT_INPUT_NOTCH_OFFSET = 20;
+    this.NOTCH_OFFSET_LEFT = 15;
+    this.STATEMENT_INPUT_PADDING_LEFT = 25;
     this.BETWEEN_STATEMENT_PADDING_Y = 4;
     this.MIN_BLOCK_HEIGHT = 20;
     this.FIELD_BORDER_RECT_X_PADDING = 5;
@@ -29,7 +30,7 @@ CustomConstantsProvider = function () {
     this.FIELD_BORDER_RECT_COLOUR = "#F5F9FF";
     this.EMPTY_INLINE_INPUT_PADDING = 17;
     this.EMPTY_INLINE_INPUT_HEIGHT = 25;
-    this.EMPTY_STATEMENT_INPUT_HEIGHT = 25;
+    this.EMPTY_STATEMENT_INPUT_HEIGHT = 27;
 };
 
 Blockly.utils.object.inherits(CustomConstantsProvider,

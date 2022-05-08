@@ -772,6 +772,18 @@ Blockly.JavaScript['b3_sleep'] = function (block) {
     return code;
 };
 
+Blockly.JavaScript['b3_run'] = function (block) {
+    var code = Blockly.JavaScript.valueToCode(block, 'CODE', Blockly.JavaScript.ORDER_ATOMIC);
+    code = eval(code) + '\n';
+    return code;
+};
+
+Blockly.JavaScript['b3_junk'] = function (block) {
+    var code = Blockly.JavaScript.valueToCode(block, 'CODE', Blockly.JavaScript.ORDER_ATOMIC);
+    code = code + ';\n';
+    return code;
+};
+
 // WORLD
 
 Blockly.JavaScript['b3world_project_name'] = function (block) {
@@ -838,7 +850,7 @@ Blockly.JavaScript['b3event_entity'] = function (block) {
 
 Blockly.JavaScript['b3world_create_entity'] = function (block) {
     var config = Blockly.JavaScript.valueToCode(block, 'CONFIG', Blockly.JavaScript.ORDER_ATOMIC);
-    var code = 'world.createEntity(' + eval(config) + ');\n';
+    var code = 'world.createEntity(' + eval(config) + ')';
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
 

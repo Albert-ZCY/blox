@@ -83,6 +83,32 @@ Blockly.Blocks['b3_sleep'] = {
     }
 };
 
+Blockly.Blocks['b3_run'] = {
+    init: function () {
+        this.appendValueInput("CODE")
+            .appendField("运行");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(10);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.Blocks['b3_junk'] = {
+    init: function () {
+        this.appendValueInput("CODE")
+            .appendField("丢弃");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(10);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
 Blockly.Blocks['b3world_project_name'] = {
     init: function () {
         this.appendDummyInput()
